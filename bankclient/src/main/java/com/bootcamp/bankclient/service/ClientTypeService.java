@@ -1,11 +1,11 @@
 package com.bootcamp.bankclient.service;
 
+import com.bootcamp.bankclient.model.dto.ClientDto;
 import com.bootcamp.bankclient.model.entities.ClientType;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface ClientTypeService {
-
     Flux<ClientType> findAll();
 
     Mono<ClientType> findById(String id);

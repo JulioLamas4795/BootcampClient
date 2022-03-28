@@ -1,8 +1,10 @@
 package com.bootcamp.bankclient.service.Impl;
 
+import com.bootcamp.bankclient.model.dto.ClientDto;
 import com.bootcamp.bankclient.model.entities.ClientType;
 import com.bootcamp.bankclient.repository.ClientTypeRepository;
 import com.bootcamp.bankclient.service.ClientTypeService;
+import com.bootcamp.bankclient.utils.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -13,6 +15,9 @@ public class ClientTypeServiceImpl implements ClientTypeService {
 
     @Autowired
     private ClientTypeRepository clientTypeRepository;
+    public Flux<ClientType> getClientType(){
+        return clientTypeRepository.findAll();
+    }
     @Override
     public Flux<ClientType> findAll() {
         return clientTypeRepository.findAll();
