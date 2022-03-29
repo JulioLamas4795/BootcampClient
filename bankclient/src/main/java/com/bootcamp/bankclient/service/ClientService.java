@@ -2,6 +2,8 @@ package com.bootcamp.bankclient.service;
 
 import com.bootcamp.bankclient.model.entities.Client;
 import com.bootcamp.bankclient.model.dto.ClientDto;
+import com.bootcamp.bankclient.model.entities.Operations;
+import com.bootcamp.bankclient.model.entities.Products;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -22,4 +24,9 @@ public interface ClientService {
     Mono<ClientDto> updateClients(Mono<ClientDto> clientDtoMono, String id);
 
     Mono<Void> deleteClient(String id);
+
+    Mono<Products> obtainProductsByClient(String id);
+
+    Mono<Operations> obtainOperationsByClient(String id);
+
 }

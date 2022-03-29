@@ -2,6 +2,8 @@ package com.bootcamp.bankclient.controller;
 
 import com.bootcamp.bankclient.model.entities.Client;
 import com.bootcamp.bankclient.model.dto.ClientDto;
+import com.bootcamp.bankclient.model.entities.Operations;
+import com.bootcamp.bankclient.model.entities.Products;
 import com.bootcamp.bankclient.service.ClientService;
 import com.bootcamp.bankclient.service.ClientTypeService;
 import com.bootcamp.bankclient.service.Impl.ClientServiceImpl;
@@ -55,6 +57,16 @@ public class ClientController {
         return clientService.getClientByClientIdNumber(clientIdNumber)
                 .map(saveClient-> ResponseEntity.ok(saveClient))
                 .defaultIfEmpty(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/report/products/{id}")
+    public Mono<Products> obtainProductsByClient(@PathVariable String id){
+        return clientService.obtainProductsByClient(id);
+    }
+
+    @GetMapping("/report/movements/{id}")
+    public Mono<Operations> obtainOperationsByClient(@PathVariable String id){
+        return clientService.obtainOperationsByClient(id);
     }
 
     @PostMapping("/create")
