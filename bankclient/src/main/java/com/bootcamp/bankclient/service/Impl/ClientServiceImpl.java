@@ -77,14 +77,14 @@ public class ClientServiceImpl implements ClientService {
 
     public Mono<Products> obtainProductsByClient(String id){
         //Tarjetas de crédito del cliente
-        CreditCardList creditCard = restTemplate.getForObject("http://localhost:8083/api/creditcard/client/{id}", CreditCardList.class, id);
+        List<CreditCard> creditCard = restTemplate.getForObject("http://localhost:8083/api/creditcard/client/{id}", List.class, id);
         System.out.println(creditCard);
         //Cuentas
-        AccountList account = restTemplate.getForObject("http://localhost:8083/api/accounts/client/{id}", AccountList.class, id);
+        List<Account> account = restTemplate.getForObject("http://localhost:8083/api/accounts/client/{id}", List.class, id);
         //Créditos
-        CreditList credit = restTemplate.getForObject("http://localhost:8083/api/credit/client/{id}", CreditList.class, id);
+        List<Credit> credit = restTemplate.getForObject("http://localhost:8083/api/credit/client/{id}", List.class, id);
 
-        Products productsByClient = new Products(account.getAccounts(), credit.getCredits(), creditCard.getCreditCards());
+        Products productsByClient = new Products(account, credit, creditCard);
 
         Mono<Products> productsMono = Mono.just(productsByClient);
 
@@ -96,12 +96,12 @@ public class ClientServiceImpl implements ClientService {
     public Mono<Operations> obtainOperationsByClient(String id){
 
         //Depositos
-        DepositList depositList = restTemplate.getForObject("http://localhost:8083/api/deposit/history/{id}", DepositList.class, id);
+        List<Deposit> depositList = restTemplate.getForObject("http://localhost:8083/api/deposit/history/{id}", List.class, id);
 
         //Retiros
-        WithdrawalList withdrawalList = restTemplate.getForObject("http://localhost:8083/api/withdrawal/client/{id}", WithdrawalList.class, id);
+        List<Withdrawal> withdrawalList = restTemplate.getForObject("http://localhost:8083/api/withdrawal/client/{id}", List.class, id);
 
-        Operations operations = new Operations(depositList.getDepositFlux(), withdrawalList.getWithdrawalFlux());
+        Operations operations = new Operations(depositList, withdrawalList);
         Mono<Operations> operationsMono = Mono.just(operations);
 
         return operationsMono;

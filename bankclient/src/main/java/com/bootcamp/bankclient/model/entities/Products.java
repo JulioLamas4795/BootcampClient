@@ -1,7 +1,8 @@
 package com.bootcamp.bankclient.model.entities;
 
 import lombok.*;
-import reactor.core.publisher.Flux;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -11,10 +12,10 @@ import reactor.core.publisher.Flux;
 @Builder
 public class Products {
 
-    Flux<Account> accountsByClient;
+    List<Account> accountsByClient;
 
-    Flux<Credit> creditsByClient;
+    List<Credit> creditsByClient;
 
-    Flux<CreditCard> creditCardByClient;
+    List<CreditCard> creditCardByClient;
 
 }

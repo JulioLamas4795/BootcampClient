@@ -3,6 +3,8 @@ package com.bootcamp.bankclient.model.entities;
 import lombok.*;
 import reactor.core.publisher.Flux;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Data
@@ -11,8 +13,8 @@ import reactor.core.publisher.Flux;
 @Builder
 public class Operations {
 
-    Flux<Deposit> depositsByClient;
+    List<Deposit> depositsByClient;
 
-    Flux<Withdrawal> withdrawalByClient;
+    List<Withdrawal> withdrawalByClient;
 
 }
